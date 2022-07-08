@@ -24,6 +24,26 @@ public class HomeController : Controller
             _dbContext.Add(new Student { Name = "Reina Jimenez" });
             _dbContext.SaveChanges();
         }
+        if (_dbContext.Contacts.Count() == 0)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                _dbContext.Add(new Contact { Name = $"Nombre {i}",Address = $"Barrio {i}" });
+            }
+            _dbContext.SaveChanges();
+        }
+        if (_dbContext.Customers.Count() == 0)
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                _dbContext.Add(new Customer { Name = $"NameCustomer {i}" });
+            }
+            _dbContext.SaveChanges();
+        }
+
+
+
+
         // print them in the log
         foreach (var item in _dbContext.Students)
         {
@@ -34,6 +54,7 @@ public class HomeController : Controller
 
     public IActionResult Privacy()
     {
+        
         return View();
     }
 

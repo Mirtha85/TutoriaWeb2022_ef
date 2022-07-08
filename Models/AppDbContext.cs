@@ -9,6 +9,9 @@ namespace webmnv_ef_01.Models
 
         }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
     }
 
 }
