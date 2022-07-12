@@ -28,15 +28,25 @@ public class HomeController : Controller
         {
             for (int i = 0; i < 10; i++)
             {
-                _dbContext.Add(new Contact { Name = $"Nombre {i}",Address = $"Barrio {i}" });
+                _dbContext.Add(new Contact { Name = $"Nombre {i}", Address = $"Barrio {i}" });
             }
             _dbContext.SaveChanges();
         }
+        if (_dbContext.Locations.Count() == 0)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                _dbContext.Add(new Location { Name = $"LocantionNumber {i}" });
+            }
+            _dbContext.SaveChanges();
+        }
+        var location = getOrCreateLocation("Heredia, Chuquisaca");
+
         if (_dbContext.Customers.Count() == 0)
         {
             for (int i = 0; i < 20; i++)
             {
-                _dbContext.Add(new Customer { Name = $"NameCustomer {i}" });
+                _dbContext.Add(new Customer { Name = $"NameCustomer {i}",Location = location });
             }
             _dbContext.SaveChanges();
         }
@@ -52,9 +62,21 @@ public class HomeController : Controller
         return View();
     }
 
+    public Location getOrCreateLocation(string name)
+    {
+        var location = _dbContext.Locations.Where(l => l.Name.Equals(name)).SingleOrDefault();
+        if (location == null)
+        {
+            location = new Location { Name = name };
+            _dbContext.Add(location);
+            _dbContext.SaveChanges();
+        }
+        return location;
+    }
+
     public IActionResult Privacy()
     {
-        
+
         return View();
     }
 
