@@ -7,6 +7,7 @@ namespace webmnv_ef_01.Models
         public Location()
         {
             this.Customers = new List<Customer>();
+            
         }
         public int Id { get; set; }
         public string Name { get; set; }

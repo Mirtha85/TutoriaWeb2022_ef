@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Location List";
+}
+
+@model IEnumerable<webmnv_ef_01.Models.Location>
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @using (Html.BeginForm("DeleteLocation", "Home", new { id = item.Id }, FormMethod.Post))
+                {
+                     <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete the location [@item.Name]?')"/>
+                }
+            </td>
+        </tr>
+
+
+    }
