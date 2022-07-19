@@ -26,7 +26,7 @@ public class HomeController : Controller
         return View(_dbContext.Locations.ToList());
 
     }
-    
+
     [HttpPost]
     public IActionResult DeleteLocation(int Id)
     {
@@ -36,6 +36,23 @@ public class HomeController : Controller
         _dbContext.SaveChanges();
         return RedirectToAction("ListLocation", "Home");
     }
+
+    public ActionResult Edit(int id)
+    {
+        return View(_dbContext.Locations.Where(s => s.Id == id).First());
+    }
+
+    [HttpPost]
+    public ActionResult SaveLocation(Location input)
+    {
+        _logger.LogInformation($"received data {input}");
+        var location = _dbContext.Locations.Where(s => s.Id == input.Id).First();
+        location.Name = input.Name;
+        _dbContext.SaveChanges();
+        return RedirectToAction("ListLocation", "Home");
+    }
+
+
 
     public IActionResult Index()
     {

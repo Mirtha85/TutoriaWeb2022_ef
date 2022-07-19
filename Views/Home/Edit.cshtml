@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@model webmnv_ef_01.Models.Location;
+<section class="content-header">
+    <h2>
+        Edit @Model.Name
+    </h2>
+    @using (Html.BeginForm("SaveLocation", "Home", FormMethod.Post))
+    {
+        <fieldset>
+            <legend>Location data</legend>
+            <div class="col-md-3">
+                @Html.HiddenFor(model => model.Id)
+                <span></span>
+
+                @Html.LabelFor(model => model.Name)
+                @Html.EditorFor(model => model.Name)
+                <span></span>
+            </div>
+        </fieldset>
+        <br />
+        <div class="col-md-4">
+            <input type="submit" value="Save">
+            @Html.ActionLink("Go to list", "ListLocation", "Home")
+        </div>
+    }
+</section>
+
+
+<!-- /.box -->
